@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Education from "../Reuseable/Education";
 import ProfessionalExperience from "../Reuseable/ProfessionalExperience";
 import ProfileLinks from "../Reuseable/ProfileLinks";
@@ -173,13 +173,13 @@ const BuildResume = () => {
     },
   ]);
 
-  const addEducationField = () => {
+    const addEducationField = () => {
     setEducationData([
       ...educationData,
       { degree: "", institution: "", duration: "", details: [""] },
     ]);
   };
-
+    
   const handleProfessionalExperienceChange = (
     index: number,
     field: keyof (typeof experienceData)[0],
@@ -196,11 +196,55 @@ const BuildResume = () => {
     setExperienceData(updatedExperience);
   };
 
+    const handleProjectChange = (
+    index: number,
+    field: keyof (typeof projectsData)[0],
+    value: string | string[]
+  ) => {
+    const updatedProjects = [...projectsData];
+
+    if (field === "details") {
+        updatedProjects[index][field] = (value as string).split("\n");
+    } else {
+        updatedProjects[index][field] = value as string;
+    }
+        setProjectsData(updatedProjects);
+  };
+
   const removeEducationField = (index: number) => {
     const updatedEducation = [...educationData];
     updatedEducation.splice(index, 1);
     setEducationData(updatedEducation);
   };
+
+
+    const addProfessionalExperienceField = () => {
+        setExperienceData([
+            ...experienceData,
+            { company: "", position: "", duration: "", details: [""] },
+        ]);
+    };
+
+    const removeProfessionalExperienceField = (index: number) => {
+        const updatedExperience = [...experienceData];
+        updatedExperience.splice(index, 1);
+        setExperienceData(updatedExperience);
+    };
+
+  const addProjectField = () => {
+        setProjectsData([
+            ...projectsData,
+            { name: "", company: "", duration: "", details: [""] },
+        ]);
+    };
+
+
+    const removeProjectField = (index: number) => {
+        const updatedProjects = [...projectsData];
+        updatedProjects.splice(index, 1);
+        setProjectsData(updatedProjects);
+    };
+
 
   return (
     <div className="flex min-h-screen w-full flex-col xl:flex-row overflow-hidden">
@@ -320,6 +364,81 @@ const BuildResume = () => {
             </button>
           </div>
 
+            {/* Professional Experience Section */}
+          <div>
+              <h3 className="text-lg font-semibold">Professional Experience</h3>
+              {experienceData.map((experience, index) => (
+                  <div key={index} className="flex flex-col gap-2 mb-4">
+                      <input
+                          type="text"
+                          placeholder="Company"
+                          className="w-full p-2 rounded-md text-black"
+                          value={experience.company}
+                          onChange={(e) =>
+                              handleProfessionalExperienceChange(
+                                  index,
+                                  "company",
+                                  e.target.value
+                              )
+                          }
+                      />
+                      <input
+                          type="text"
+                          placeholder="Position"
+                          className="w-full p-2 rounded-md text-black"
+                          value={experience.position}
+                           onChange={(e) =>
+                              handleProfessionalExperienceChange(
+                                  index,
+                                  "position",
+                                  e.target.value
+                              )
+                          }
+                      />
+                      <input
+                          type="text"
+                          placeholder="Duration"
+                          className="w-full p-2 rounded-md text-black"
+                          value={experience.duration}
+                           onChange={(e) =>
+                              handleProfessionalExperienceChange(
+                                  index,
+                                  "duration",
+                                  e.target.value
+                              )
+                          }
+                      />
+                      <textarea
+                          placeholder="Details (one per line)"
+                          className="w-full p-2 rounded-md text-black"
+                          rows={3}
+                          value={experience.details.join("\n")}
+                          onChange={(e) =>
+                              handleProfessionalExperienceChange(
+                                  index,
+                                  "details",
+                                  e.target.value
+                              )
+                          }
+                      />
+                      <button
+                          type="button"
+                          className="text-red-500 hover:text-red-700 text-sm"
+                           onClick={() => removeProfessionalExperienceField(index)}
+                      >
+                          Remove
+                      </button>
+                  </div>
+              ))}
+              <button
+                  type="button"
+                  className="text-blue-500 hover:text-blue-700 text-sm"
+                   onClick={addProfessionalExperienceField}
+              >
+                  Add Experience
+              </button>
+          </div>
+
           {/* Skills Inputs */}
           <div>
             <h3 className="text-lg font-semibold">Skills</h3>
@@ -347,7 +466,80 @@ const BuildResume = () => {
             ))}
           </div>
 
-          {/* Experience Inputs */}
+            {/* Projects Section */}
+            <div>
+                <h3 className="text-lg font-semibold">Projects</h3>
+                {projectsData.map((project, index) => (
+                    <div key={index} className="flex flex-col gap-2 mb-4">
+                        <input
+                            type="text"
+                            placeholder="Project Name"
+                            className="w-full p-2 rounded-md text-black"
+                            value={project.name}
+                            onChange={(e) =>
+                                handleProjectChange(
+                                    index,
+                                    "name",
+                                    e.target.value
+                                )
+                            }
+                        />
+                        <input
+                            type="text"
+                            placeholder="Company"
+                            className="w-full p-2 rounded-md text-black"
+                            value={project.company}
+                            onChange={(e) =>
+                                handleProjectChange(
+                                    index,
+                                    "company",
+                                    e.target.value
+                                )
+                            }
+                        />
+                        <input
+                            type="text"
+                            placeholder="Duration"
+                            className="w-full p-2 rounded-md text-black"
+                            value={project.duration}
+                            onChange={(e) =>
+                                handleProjectChange(
+                                    index,
+                                    "duration",
+                                    e.target.value
+                                )
+                            }
+                        />
+                        <textarea
+                            placeholder="Details (one per line)"
+                            className="w-full p-2 rounded-md text-black"
+                            rows={3}
+                            value={project.details.join("\n")}
+                            onChange={(e) =>
+                                handleProjectChange(
+                                    index,
+                                    "details",
+                                    e.target.value
+                                )
+                            }
+                        />
+                        <button
+                            type="button"
+                            className="text-red-500 hover:text-red-700 text-sm"
+                            onClick={() => removeProjectField(index)}
+                        >
+                            Remove
+                        </button>
+                    </div>
+                ))}
+                <button
+                    type="button"
+                    className="text-blue-500 hover:text-blue-700 text-sm"
+                    onClick={addProjectField}
+                >
+                    Add Project
+                </button>
+            </div>
 
           {/* Profile Links */}
           <div>
