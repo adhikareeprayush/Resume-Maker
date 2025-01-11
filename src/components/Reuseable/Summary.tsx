@@ -1,4 +1,5 @@
 import React from "react";
+import SectionHeader from "./SectionHeader";
 
 interface SummaryProps {
   title: string; // The title of the summary section
@@ -7,9 +8,8 @@ interface SummaryProps {
 
 const Summary: React.FC<SummaryProps> = ({ title, content }) => {
   return (
-    <div className="flex flex-col">
-      <h5 className="text-xl font-medium font-sans">{title}</h5>
-      <hr className="h-[1px] w-full bg-slate-700 mb-1" />
+    <div className="flex flex-col ">
+      <SectionHeader title={title} />
       <p className="text-neutral-600">{content}</p>
     </div>
   );

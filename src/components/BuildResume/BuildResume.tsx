@@ -1,61 +1,409 @@
-import EducationCard from "../Resuseable/EducationCard";
-import Summary from "../Resuseable/Summary";
+import React, { useState } from "react";
+import Education from "../Reuseable/Education";
+import ProfessionalExperience from "../Reuseable/ProfessionalExperience";
+import ProfileLinks from "../Reuseable/ProfileLinks";
+import Projects from "../Reuseable/Projects";
+import Skills from "../Reuseable/Skills";
+import Summary from "../Reuseable/Summary";
+import Headline from "../Reuseable/Headline";
 
-const educationData = [
-  {
-    degree: "Bachelor's in Computer Engineering",
-    institution: "IOE Purwanchal Campus, Dharan",
-    duration: "2023-2027",
-    details: ["Studying the core concepts of computer programming"],
-  },
-  {
-    degree: "High School in Science",
-    institution: "XYZ High School",
-    duration: "2020-2022",
-    details: ["Specialized in Mathematics and Physics"],
-  },
-];
+// Define the type for education data
+type EducationData = {
+  degree: string;
+  institution: string;
+  duration: string;
+  details: string[];
+};
 
 const BuildResume = () => {
+  // State to manage resume data
+  const [headlineData, setHeadlineData] = useState({
+    name: "Prayush Adhikari",
+    role: "Frontend Developer",
+    location: "Belbari-1, Morang, Nepal",
+    email: "adhikareeprayush@gmail.com",
+    phone: "+977-9824558987",
+  });
+
+  const [summaryContent, setSummaryContent] = useState(
+    "Welcome to my profile! I am a passionate developer with expertise in building reusable components and scalable applications."
+  );
+
+  const [skillsDate, setSkillsData] = useState([
+    { skill: "Frontend", profiency: ["React", "HTML", "CSS"] },
+    { skill: "Backend", profiency: ["Node.js", "Express", "MongoDB"] },
+    { skill: "DevOps", profiency: ["Docker", "Kubernetes", "Jenkins"] },
+    { skill: "Others", profiency: ["Git", "Jest", "Cypress"] },
+  ]);
+
+  // Explicitly type educationData
+  const [educationData, setEducationData] = useState<EducationData[]>([
+    {
+      degree: "Bachelor's in Computer Engineering",
+      institution: "IOE Purwanchal Campus, Dharan",
+      duration: "2023-2027",
+      details: ["Studying the core concepts of computer programming"],
+    },
+    {
+      degree: "High School in Science",
+      institution: "XYZ High School",
+      duration: "2020-2022",
+      details: ["Specialized in Mathematics and Physics"],
+    },
+  ]);
+
+  type ProfileLink = {
+    platform: string;
+    username: string;
+    url: string;
+  };
+
+  const [profileLinksData, setProfileLinksData] = useState<ProfileLink[]>([
+    {
+      platform: "LinkedIn",
+      username: "adhikareeprayush",
+      url: "https://www.linkedin.com/in/adhikareeprayush",
+    },
+    {
+      platform: "GitHub",
+      username: "prayushadhikari",
+      url: "https://github.com/prayushadhikari",
+    },
+    {
+      platform: "Twitter",
+      username: "prayush",
+      url: "https://twitter.com/prayush",
+    },
+  ]);
+
+  // Handlers for updating data
+  const handleHeadlineChange = (field: string, value: string) => {
+    setHeadlineData({ ...headlineData, [field]: value });
+  };
+
+  const handleSummaryChange = (value: string) => {
+    setSummaryContent(value);
+  };
+
+  const handleEducationChange = (
+    index: number,
+    field: keyof EducationData,
+    value: string | string[]
+  ) => {
+    const updatedEducation = [...educationData];
+
+    if (field === "details") {
+      updatedEducation[index][field] = (value as string).split("\n");
+    } else {
+      updatedEducation[index][field] = value as string;
+    }
+
+    setEducationData(updatedEducation);
+  };
+
+  const handleSkillChange = (
+    index: number,
+    field: keyof (typeof skillsDate)[0],
+    value: string | string[]
+  ) => {
+    const updatedSkills = [...skillsDate];
+
+    if (field === "profiency") {
+      updatedSkills[index][field] = (value as string).split("\n");
+    } else {
+      updatedSkills[index][field] = value as string;
+    }
+
+    setSkillsData(updatedSkills);
+  };
+
+  const handleProfileLinkChange = (
+    index: number,
+    field: keyof ProfileLink,
+    value: string
+  ) => {
+    const updatedLinks = [...profileLinksData];
+    updatedLinks[index][field] = value;
+    setProfileLinksData(updatedLinks);
+  };
+
+  const [experienceData, setExperienceData] = useState([
+    {
+      company: "Google",
+      position: "Software Engineer",
+      duration: "2019 - Present",
+      details: [
+        "Developed and maintained web applications using React",
+        "Worked with a team of developers to build scalable applications",
+        "Collaborated with designers to create user-friendly interfaces",
+      ],
+    },
+    {
+      company: "Facebook",
+      position: "Frontend Developer",
+      duration: "2017 - 2019",
+      details: [
+        "Developed user-facing features using React",
+        "Optimized applications for maximum speed and scalability",
+        "Collaborated with back-end developers and web designers to improve usability",
+      ],
+    },
+  ]);
+
+  const [projectsData, setProjectsData] = useState([
+    {
+      name: "Project 1",
+      company: "Company 1",
+      duration: "Jan 2020 - Mar 2021",
+      details: [
+        "Developed and maintained web applications using React",
+        "Worked with a team of developers to build scalable applications",
+        "Collaborated with designers to create user-friendly interfaces",
+      ],
+    },
+    {
+      name: "Project 2",
+      company: "Company 2",
+      duration: "Mar 2019 - Dec 2019",
+      details: [
+        "Developed user-facing features using React",
+        "Optimized applications for maximum speed and scalability",
+        "Collaborated with back-end developers and web designers to improve usability",
+      ],
+    },
+  ]);
+
+  const addEducationField = () => {
+    setEducationData([
+      ...educationData,
+      { degree: "", institution: "", duration: "", details: [""] },
+    ]);
+  };
+
+  const handleProfessionalExperienceChange = (
+    index: number,
+    field: keyof (typeof experienceData)[0],
+    value: string | string[]
+  ) => {
+    const updatedExperience = [...experienceData];
+
+    if (field === "details") {
+      updatedExperience[index][field] = (value as string).split("\n");
+    } else {
+      updatedExperience[index][field] = value as string;
+    }
+
+    setExperienceData(updatedExperience);
+  };
+
+  const removeEducationField = (index: number) => {
+    const updatedEducation = [...educationData];
+    updatedEducation.splice(index, 1);
+    setEducationData(updatedEducation);
+  };
+
   return (
-    <div className="flex min-h-screen w-full">
-      <div className="flex flex-col w-1/2 bg-gray-800 min-h-screen">h</div>
-      <div className="flex flex-col w-1/2 bg-white min-h-screen items-center justify-center">
-        <div className="h-[90%] w-[80%] bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-6 flex flex-col gap-4">
-          <div className="flex flex-col">
-            <h4 className="text-3xl font-bold font-sans s">Prayush Adhikari</h4>
-            <p className="font-sans text-xl text-black font-semibold">
-              Frontend Developer
-            </p>
-            <div className="flex items-center gap-2">
-              <a className="pr-2 border-r-[1px] border-slate-800">
-                Belbari-1, Morang, Nepal
-              </a>
-              <a className="underline pr-2 border-r-[1px] border-slate-800">
-                adhikareeprayush@gmail.com
-              </a>
-              <a>+977-9824558987</a>
-            </div>
-            <hr className="h-[3px] w-full bg-black mt-1" />
+    <div className="flex min-h-screen w-full flex-col xl:flex-row overflow-hidden">
+      {/* Left Form Section */}
+      <div className="flex flex-col xl:w-1/2 w-full bg-gray-800 min-h-screen p-6 text-white">
+        <form className="flex flex-col gap-4">
+          <h2 className="text-2xl font-bold">Edit Resume</h2>
+
+          {/* Headline Section */}
+          <div>
+            <h3 className="text-lg font-semibold">Headline</h3>
+            <input
+              type="text"
+              placeholder="Name"
+              className="w-full p-2 rounded-md text-black"
+              value={headlineData.name}
+              onChange={(e) => handleHeadlineChange("name", e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Role"
+              className="w-full p-2 rounded-md text-black mt-2"
+              value={headlineData.role}
+              onChange={(e) => handleHeadlineChange("role", e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Location"
+              className="w-full p-2 rounded-md text-black mt-2"
+              value={headlineData.location}
+              onChange={(e) => handleHeadlineChange("location", e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full p-2 rounded-md text-black mt-2"
+              value={headlineData.email}
+              onChange={(e) => handleHeadlineChange("email", e.target.value)}
+            />
+            <input
+              type="tel"
+              placeholder="Phone"
+              className="w-full p-2 rounded-md text-black mt-2"
+              value={headlineData.phone}
+              onChange={(e) => handleHeadlineChange("phone", e.target.value)}
+            />
           </div>
-          <Summary
-            title="Introduction"
-            content="Welcome to my profile! I am a passionate developer with expertise in building reusable components and scalable applications."
-          />
-          <div className="flex flex-col">
-            <h5 className="text-xl font-medium font-sans">Education</h5>
-            <div className="flex flex-col gap-2">
-              {educationData.map((education, index) => (
-                <EducationCard
-                  key={index}
-                  degree={education.degree}
-                  institution={education.institution}
-                  duration={education.duration}
-                  details={education.details}
+
+          {/* Summary Section */}
+          <div>
+            <h3 className="text-lg font-semibold">Summary</h3>
+            <textarea
+              placeholder="Write a brief summary..."
+              className="w-full p-2 rounded-md text-black"
+              rows={4}
+              value={summaryContent}
+              onChange={(e) => handleSummaryChange(e.target.value)}
+            />
+          </div>
+
+          {/* Education Section */}
+          <div>
+            <h3 className="text-lg font-semibold">Education</h3>
+            {educationData.map((education, index) => (
+              <div key={index} className="flex flex-col gap-2 mb-4">
+                <input
+                  type="text"
+                  placeholder="Degree"
+                  className="w-full p-2 rounded-md text-black"
+                  value={education.degree}
+                  onChange={(e) =>
+                    handleEducationChange(index, "degree", e.target.value)
+                  }
                 />
-              ))}
-            </div>
+                <input
+                  type="text"
+                  placeholder="Institution"
+                  className="w-full p-2 rounded-md text-black"
+                  value={education.institution}
+                  onChange={(e) =>
+                    handleEducationChange(index, "institution", e.target.value)
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Duration"
+                  className="w-full p-2 rounded-md text-black"
+                  value={education.duration}
+                  onChange={(e) =>
+                    handleEducationChange(index, "duration", e.target.value)
+                  }
+                />
+                <textarea
+                  placeholder="Details (one per line)"
+                  className="w-full p-2 rounded-md text-black"
+                  rows={3}
+                  value={education.details.join("\n")}
+                  onChange={(e) =>
+                    handleEducationChange(index, "details", e.target.value)
+                  }
+                />
+                <button
+                  type="button"
+                  className="text-red-500 hover:text-red-700 text-sm"
+                  onClick={() => removeEducationField(index)}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              className="text-blue-500 hover:text-blue-700 text-sm"
+              onClick={addEducationField}
+            >
+              Add Education
+            </button>
           </div>
+
+          {/* Skills Inputs */}
+          <div>
+            <h3 className="text-lg font-semibold">Skills</h3>
+            {skillsDate.map((skill, index) => (
+              <div key={index} className="flex flex-col gap-2 mb-4">
+                <input
+                  type="text"
+                  placeholder="Skill"
+                  className="w-full p-2 rounded-md text-black"
+                  value={skill.skill}
+                  onChange={(e) =>
+                    handleSkillChange(index, "skill", e.target.value)
+                  }
+                />
+                <textarea
+                  placeholder="Profiency (one per line)"
+                  className="w-full p-2 rounded-md text-black"
+                  rows={3}
+                  value={skill.profiency.join("\n")}
+                  onChange={(e) =>
+                    handleSkillChange(index, "profiency", e.target.value)
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Experience Inputs */}
+
+          {/* Profile Links */}
+          <div>
+            <h3 className="text-lg font-semibold">Profile Links</h3>
+            {profileLinksData.map((link, index) => (
+              <div key={index} className="flex flex-col gap-2 mb-4">
+                <input
+                  type="text"
+                  placeholder="Platform"
+                  className="w-full p-2 rounded-md text-black"
+                  value={link.platform}
+                  onChange={(e) =>
+                    handleProfileLinkChange(index, "platform", e.target.value)
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Username"
+                  className="w-full p-2 rounded-md text-black"
+                  value={link.username}
+                  onChange={(e) =>
+                    handleProfileLinkChange(index, "username", e.target.value)
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="URL"
+                  className="w-full p-2 rounded-md text-black"
+                  value={link.url}
+                  onChange={(e) =>
+                    handleProfileLinkChange(index, "url", e.target.value)
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        </form>
+      </div>
+
+      {/* Right Preview Section */}
+      <div className="flex flex-col xl:w-1/2 w-full bg-white min-h-screen items-center justify-center p-6">
+        <div className="w-[90%] bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-6 flex flex-col gap-4">
+          {/* Preview Components */}
+          <Headline
+            name={headlineData.name}
+            role={headlineData.role}
+            location={headlineData.location}
+            email={headlineData.email}
+            phone={headlineData.phone}
+          />
+          <Summary title="Introduction" content={summaryContent} />
+          <Education educationData={educationData} />
+          <Skills skills={skillsDate} />
+          <ProfessionalExperience experiences={experienceData} />
+          <Projects projects={projectsData} />
+          <ProfileLinks profileLinks={profileLinksData} />
         </div>
       </div>
     </div>
