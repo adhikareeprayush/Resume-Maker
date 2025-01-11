@@ -6,7 +6,6 @@ import BuildResume from "./components/BuildResume/BuildResume";
 function App() {
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(false);
-  const [step3, setStep3] = useState(false);
 
   return (
     <div className="min-h-screen bg-white flex flex-col justify-center items-center relative">
