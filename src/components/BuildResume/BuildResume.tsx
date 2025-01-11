@@ -248,72 +248,72 @@ const BuildResume = () => {
 
   return (
     <div className="flex min-h-screen w-full flex-col xl:flex-row overflow-hidden">
-      {/* Left Form Section */}
-      <div className="flex flex-col xl:w-1/2 w-full bg-gray-800 min-h-screen p-6 text-white">
-        <form className="flex flex-col gap-4">
-          <h2 className="text-2xl font-bold">Edit Resume</h2>
+{/* Left Form Section */}
+<div className="flex flex-col xl:w-1/2 w-full bg-gray-100 min-h-screen p-8 text-gray-800">
+        <form className="flex flex-col gap-8">
+          <h2 className="text-3xl font-bold font-sans mb-4">Edit Resume</h2>
 
           {/* Headline Section */}
-          <div>
-            <h3 className="text-lg font-semibold">Headline</h3>
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold font-sans mb-3">Headline</h3>
             <input
               type="text"
               placeholder="Name"
-              className="w-full p-2 rounded-md text-black"
+              className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
               value={headlineData.name}
               onChange={(e) => handleHeadlineChange("name", e.target.value)}
             />
             <input
               type="text"
               placeholder="Role"
-              className="w-full p-2 rounded-md text-black mt-2"
+             className="w-full p-3 border rounded-md font-sans text-gray-700 mt-3 focus:ring focus:ring-blue-200"
               value={headlineData.role}
               onChange={(e) => handleHeadlineChange("role", e.target.value)}
             />
             <input
               type="text"
               placeholder="Location"
-              className="w-full p-2 rounded-md text-black mt-2"
+              className="w-full p-3 border rounded-md font-sans text-gray-700 mt-3 focus:ring focus:ring-blue-200"
               value={headlineData.location}
               onChange={(e) => handleHeadlineChange("location", e.target.value)}
             />
             <input
               type="email"
               placeholder="Email"
-              className="w-full p-2 rounded-md text-black mt-2"
+              className="w-full p-3 border rounded-md font-sans text-gray-700 mt-3 focus:ring focus:ring-blue-200"
               value={headlineData.email}
               onChange={(e) => handleHeadlineChange("email", e.target.value)}
             />
             <input
               type="tel"
               placeholder="Phone"
-              className="w-full p-2 rounded-md text-black mt-2"
+              className="w-full p-3 border rounded-md font-sans text-gray-700 mt-3 focus:ring focus:ring-blue-200"
               value={headlineData.phone}
               onChange={(e) => handleHeadlineChange("phone", e.target.value)}
             />
           </div>
 
           {/* Summary Section */}
-          <div>
-            <h3 className="text-lg font-semibold">Summary</h3>
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold font-sans mb-3">Summary</h3>
             <textarea
               placeholder="Write a brief summary..."
-              className="w-full p-2 rounded-md text-black"
-              rows={4}
+              className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
+                rows={4}
               value={summaryContent}
               onChange={(e) => handleSummaryChange(e.target.value)}
             />
           </div>
 
           {/* Education Section */}
-          <div>
-            <h3 className="text-lg font-semibold">Education</h3>
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold font-sans mb-3">Education</h3>
             {educationData.map((education, index) => (
-              <div key={index} className="flex flex-col gap-2 mb-4">
+              <div key={index} className="flex flex-col gap-3 mb-5 p-4 border rounded-md">
                 <input
                   type="text"
                   placeholder="Degree"
-                  className="w-full p-2 rounded-md text-black"
+                  className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   value={education.degree}
                   onChange={(e) =>
                     handleEducationChange(index, "degree", e.target.value)
@@ -322,7 +322,7 @@ const BuildResume = () => {
                 <input
                   type="text"
                   placeholder="Institution"
-                  className="w-full p-2 rounded-md text-black"
+                  className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   value={education.institution}
                   onChange={(e) =>
                     handleEducationChange(index, "institution", e.target.value)
@@ -331,7 +331,7 @@ const BuildResume = () => {
                 <input
                   type="text"
                   placeholder="Duration"
-                  className="w-full p-2 rounded-md text-black"
+                  className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   value={education.duration}
                   onChange={(e) =>
                     handleEducationChange(index, "duration", e.target.value)
@@ -339,40 +339,40 @@ const BuildResume = () => {
                 />
                 <textarea
                   placeholder="Details (one per line)"
-                  className="w-full p-2 rounded-md text-black"
+                  className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   rows={3}
                   value={education.details.join("\n")}
                   onChange={(e) =>
                     handleEducationChange(index, "details", e.target.value)
                   }
                 />
-                <button
+                 <button
                   type="button"
-                  className="text-red-500 hover:text-red-700 text-sm"
+                  className="text-red-500 hover:text-red-700 text-sm mt-2 self-start"
                   onClick={() => removeEducationField(index)}
                 >
                   Remove
                 </button>
               </div>
             ))}
-            <button
-              type="button"
-              className="text-blue-500 hover:text-blue-700 text-sm"
-              onClick={addEducationField}
-            >
-              Add Education
-            </button>
+              <button
+                  type="button"
+                  className="text-blue-500 hover:text-blue-700 text-sm mt-2 self-start"
+                  onClick={addEducationField}
+              >
+                  Add Education
+              </button>
           </div>
 
             {/* Professional Experience Section */}
-          <div>
-              <h3 className="text-lg font-semibold">Professional Experience</h3>
+          <div className="mb-6">
+              <h3 className="text-xl font-semibold font-sans mb-3">Professional Experience</h3>
               {experienceData.map((experience, index) => (
-                  <div key={index} className="flex flex-col gap-2 mb-4">
+                  <div key={index} className="flex flex-col gap-3 mb-5 p-4 border rounded-md">
                       <input
                           type="text"
                           placeholder="Company"
-                          className="w-full p-2 rounded-md text-black"
+                          className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                           value={experience.company}
                           onChange={(e) =>
                               handleProfessionalExperienceChange(
@@ -385,7 +385,7 @@ const BuildResume = () => {
                       <input
                           type="text"
                           placeholder="Position"
-                          className="w-full p-2 rounded-md text-black"
+                          className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                           value={experience.position}
                            onChange={(e) =>
                               handleProfessionalExperienceChange(
@@ -398,7 +398,7 @@ const BuildResume = () => {
                       <input
                           type="text"
                           placeholder="Duration"
-                          className="w-full p-2 rounded-md text-black"
+                         className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                           value={experience.duration}
                            onChange={(e) =>
                               handleProfessionalExperienceChange(
@@ -410,7 +410,7 @@ const BuildResume = () => {
                       />
                       <textarea
                           placeholder="Details (one per line)"
-                          className="w-full p-2 rounded-md text-black"
+                          className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                           rows={3}
                           value={experience.details.join("\n")}
                           onChange={(e) =>
@@ -423,7 +423,7 @@ const BuildResume = () => {
                       />
                       <button
                           type="button"
-                          className="text-red-500 hover:text-red-700 text-sm"
+                           className="text-red-500 hover:text-red-700 text-sm mt-2 self-start"
                            onClick={() => removeProfessionalExperienceField(index)}
                       >
                           Remove
@@ -432,7 +432,7 @@ const BuildResume = () => {
               ))}
               <button
                   type="button"
-                  className="text-blue-500 hover:text-blue-700 text-sm"
+                   className="text-blue-500 hover:text-blue-700 text-sm mt-2 self-start"
                    onClick={addProfessionalExperienceField}
               >
                   Add Experience
@@ -440,14 +440,14 @@ const BuildResume = () => {
           </div>
 
           {/* Skills Inputs */}
-          <div>
-            <h3 className="text-lg font-semibold">Skills</h3>
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold font-sans mb-3">Skills</h3>
             {skillsDate.map((skill, index) => (
-              <div key={index} className="flex flex-col gap-2 mb-4">
+              <div key={index} className="flex flex-col gap-3 mb-5 p-4 border rounded-md">
                 <input
                   type="text"
                   placeholder="Skill"
-                  className="w-full p-2 rounded-md text-black"
+                   className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   value={skill.skill}
                   onChange={(e) =>
                     handleSkillChange(index, "skill", e.target.value)
@@ -455,7 +455,7 @@ const BuildResume = () => {
                 />
                 <textarea
                   placeholder="Profiency (one per line)"
-                  className="w-full p-2 rounded-md text-black"
+                    className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   rows={3}
                   value={skill.profiency.join("\n")}
                   onChange={(e) =>
@@ -467,14 +467,14 @@ const BuildResume = () => {
           </div>
 
             {/* Projects Section */}
-            <div>
-                <h3 className="text-lg font-semibold">Projects</h3>
+            <div className="mb-6">
+                <h3 className="text-xl font-semibold font-sans mb-3">Projects</h3>
                 {projectsData.map((project, index) => (
-                    <div key={index} className="flex flex-col gap-2 mb-4">
+                    <div key={index} className="flex flex-col gap-3 mb-5 p-4 border rounded-md">
                         <input
                             type="text"
                             placeholder="Project Name"
-                            className="w-full p-2 rounded-md text-black"
+                             className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                             value={project.name}
                             onChange={(e) =>
                                 handleProjectChange(
@@ -487,7 +487,7 @@ const BuildResume = () => {
                         <input
                             type="text"
                             placeholder="Company"
-                            className="w-full p-2 rounded-md text-black"
+                             className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                             value={project.company}
                             onChange={(e) =>
                                 handleProjectChange(
@@ -500,7 +500,7 @@ const BuildResume = () => {
                         <input
                             type="text"
                             placeholder="Duration"
-                            className="w-full p-2 rounded-md text-black"
+                            className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                             value={project.duration}
                             onChange={(e) =>
                                 handleProjectChange(
@@ -512,7 +512,7 @@ const BuildResume = () => {
                         />
                         <textarea
                             placeholder="Details (one per line)"
-                            className="w-full p-2 rounded-md text-black"
+                           className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                             rows={3}
                             value={project.details.join("\n")}
                             onChange={(e) =>
@@ -525,16 +525,16 @@ const BuildResume = () => {
                         />
                         <button
                             type="button"
-                            className="text-red-500 hover:text-red-700 text-sm"
+                            className="text-red-500 hover:text-red-700 text-sm mt-2 self-start"
                             onClick={() => removeProjectField(index)}
                         >
                             Remove
                         </button>
                     </div>
                 ))}
-                <button
+                 <button
                     type="button"
-                    className="text-blue-500 hover:text-blue-700 text-sm"
+                    className="text-blue-500 hover:text-blue-700 text-sm mt-2 self-start"
                     onClick={addProjectField}
                 >
                     Add Project
@@ -542,14 +542,14 @@ const BuildResume = () => {
             </div>
 
           {/* Profile Links */}
-          <div>
-            <h3 className="text-lg font-semibold">Profile Links</h3>
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold font-sans mb-3">Profile Links</h3>
             {profileLinksData.map((link, index) => (
-              <div key={index} className="flex flex-col gap-2 mb-4">
+              <div key={index} className="flex flex-col gap-3 mb-5 p-4 border rounded-md">
                 <input
                   type="text"
                   placeholder="Platform"
-                  className="w-full p-2 rounded-md text-black"
+                   className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   value={link.platform}
                   onChange={(e) =>
                     handleProfileLinkChange(index, "platform", e.target.value)
@@ -558,7 +558,7 @@ const BuildResume = () => {
                 <input
                   type="text"
                   placeholder="Username"
-                  className="w-full p-2 rounded-md text-black"
+                    className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   value={link.username}
                   onChange={(e) =>
                     handleProfileLinkChange(index, "username", e.target.value)
@@ -567,7 +567,7 @@ const BuildResume = () => {
                 <input
                   type="text"
                   placeholder="URL"
-                  className="w-full p-2 rounded-md text-black"
+                    className="w-full p-3 border rounded-md font-sans text-gray-700 focus:ring focus:ring-blue-200"
                   value={link.url}
                   onChange={(e) =>
                     handleProfileLinkChange(index, "url", e.target.value)
