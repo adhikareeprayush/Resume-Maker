@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Education from "../Reuseable/Education";
 import ProfessionalExperience from "../Reuseable/ProfessionalExperience";
 import ProfileLinks from "../Reuseable/ProfileLinks";
