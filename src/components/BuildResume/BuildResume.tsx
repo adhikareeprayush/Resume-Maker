@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Education from "../Reuseable/Education";
 import ProfessionalExperience from "../Reuseable/ProfessionalExperience";
 import ProfileLinks from "../Reuseable/ProfileLinks";
@@ -76,16 +76,29 @@ const BuildResume = () => {
         },
     ]);
 
+   // Refs for each section in the preview
+    const headlineRef = useRef<HTMLDivElement>(null);
+    const summaryRef = useRef<HTMLDivElement>(null);
+    const educationRef = useRef<HTMLDivElement>(null);
+    const skillsRef = useRef<HTMLDivElement>(null);
+    const experienceRef = useRef<HTMLDivElement>(null);
+    const projectsRef = useRef<HTMLDivElement>(null);
+    const profileLinksRef = useRef<HTMLDivElement>(null);
+
+
     // Handlers for updating data
     const handleHeadlineChange = (field: string, value: string) => {
         setHeadlineData({ ...headlineData, [field]: value });
+        scrollToSection(headlineRef);
     };
 
     const handleSummaryChange = (value: string) => {
         setSummaryContent(value);
+        scrollToSection(summaryRef);
+
     };
 
-     const handleEducationChange = (
+    const handleEducationChange = (
         index: number,
         field: keyof EducationData,
         value: string | string[]
@@ -99,6 +112,7 @@ const BuildResume = () => {
         }
 
         setEducationData(updatedEducation);
+        scrollToSection(educationRef);
     };
 
     const handleSkillChange = (
@@ -115,8 +129,9 @@ const BuildResume = () => {
         }
 
         setSkillsData(updatedSkills);
-    };
+        scrollToSection(skillsRef);
 
+    };
 
     const handleProfileLinkChange = (
         index: number,
@@ -126,6 +141,7 @@ const BuildResume = () => {
         const updatedLinks = [...profileLinksData];
         updatedLinks[index][field] = value;
         setProfileLinksData(updatedLinks);
+        scrollToSection(profileLinksRef);
     };
 
     const [experienceData, setExperienceData] = useState([
@@ -195,6 +211,7 @@ const BuildResume = () => {
         }
 
         setExperienceData(updatedExperience);
+         scrollToSection(experienceRef);
     };
 
     const handleProjectChange = (
@@ -210,6 +227,7 @@ const BuildResume = () => {
             updatedProjects[index][field] = value as string;
         }
         setProjectsData(updatedProjects);
+         scrollToSection(projectsRef);
     };
 
     const removeEducationField = (index: number) => {
@@ -239,12 +257,23 @@ const BuildResume = () => {
         ]);
     };
 
-
     const removeProjectField = (index: number) => {
         const updatedProjects = [...projectsData];
         updatedProjects.splice(index, 1);
         setProjectsData(updatedProjects);
     };
+
+    // Function to scroll to a given section
+    const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
+        if(ref.current){
+            ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Add temporary highlight effect
+            ref.current.classList.add('bg-blue-100','transition-colors', 'duration-500');
+             setTimeout(() => {
+                ref.current?.classList.remove('bg-blue-100');
+            }, 500);
+        }
+    }
 
 
     return (
@@ -607,19 +636,33 @@ const BuildResume = () => {
            <div className="xl:w-2/3 w-full bg-white  p-6 fixed top-0 right-0 h-screen  overflow-y-auto">
                 <div className="w-[90%] bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-6 flex flex-col gap-4 ">
                     {/* Preview Components */}
-                    <Headline
-                        name={headlineData.name}
-                        role={headlineData.role}
-                        location={headlineData.location}
-                        email={headlineData.email}
-                        phone={headlineData.phone}
-                    />
-                    <Summary title="Introduction" content={summaryContent} />
-                    <Education educationData={educationData} />
-                    <Skills skills={skillsDate} />
-                    <ProfessionalExperience experiences={experienceData} />
-                    <Projects projects={projectsData} />
-                    <ProfileLinks profileLinks={profileLinksData} />
+                    <div ref={headlineRef}>
+                       <Headline
+                            name={headlineData.name}
+                            role={headlineData.role}
+                            location={headlineData.location}
+                            email={headlineData.email}
+                            phone={headlineData.phone}
+                        />
+                    </div>
+                     <div ref={summaryRef}>
+                         <Summary title="Introduction" content={summaryContent} />
+                     </div>
+                    <div ref={educationRef}>
+                        <Education educationData={educationData} />
+                    </div>
+                   <div ref={skillsRef}>
+                         <Skills skills={skillsDate} />
+                   </div>
+                    <div ref={experienceRef}>
+                        <ProfessionalExperience experiences={experienceData} />
+                    </div>
+                    <div ref={projectsRef}>
+                         <Projects projects={projectsData} />
+                    </div>
+                    <div ref={profileLinksRef}>
+                       <ProfileLinks profileLinks={profileLinksData} />
+                    </div>
                 </div>
             </div>
         </div>
