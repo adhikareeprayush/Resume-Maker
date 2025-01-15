@@ -17,13 +17,13 @@ const Headline: React.FC<HeadlineProps> = ({
 }) => {
   return (
     <div className="flex flex-col">
-      <h4 className="text-3xl font-bold font-sans">{name}</h4>
-      <p className="font-sans text-xl text-black font-semibold">{role}</p>
-      <div className="flex items-center gap-2">
-        <a className="pr-2 border-r-[1px] border-slate-800">{location}</a>
+      <h4 className="text-2xl md:text-3xl font-bold font-sans">{name}</h4>
+      <p className="font-sans text-lg md:text-xl text-black font-semibold">{role}</p>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 text-sm md:text-base">
+        <span className="sm:pr-2 sm:border-r-[1px] sm:border-slate-800">{location}</span>
         <a
           href={`mailto:${email}`}
-          className="underline pr-2 border-r-[1px] border-slate-800"
+          className="underline sm:pr-2 sm:border-r-[1px] sm:border-slate-800"
         >
           {email}
         </a>

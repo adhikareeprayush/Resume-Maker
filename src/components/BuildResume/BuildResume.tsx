@@ -300,12 +300,13 @@ const BuildResume = () => {
     };
 
 
+
     return (
-        <div className="flex min-h-screen w-full  overflow-hidden">
+        <div className="flex flex-col lg:flex-row min-h-screen w-full overflow-hidden">
             {/* Left Form Section */}
-            <div className="flex flex-col xl:w-1/3 w-full bg-gray-100 min-h-screen p-8 text-gray-800 overflow-y-auto">
-                <form className="flex flex-col gap-6">
-                     <h2 className="text-3xl font-bold font-sans mb-4">Edit Resume</h2>
+            <div className="lg:w-1/3 w-full bg-gray-100 min-h-screen p-4 md:p-8 text-gray-800 overflow-y-auto">
+            <form className="flex flex-col gap-6 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold font-sans mb-4">Edit Resume</h2>
                     {/* Headline Section */}
                     <div className="mb-4 bg-white p-6 rounded-md shadow-md">
                         <h3 className="text-xl font-semibold font-sans mb-3 text-gray-700">Headline</h3>
@@ -657,8 +658,8 @@ const BuildResume = () => {
             </div>
 
             {/* Right Preview Section */}
-           <div className="xl:w-2/3 w-full bg-white  p-6 fixed top-0 right-0 h-screen  overflow-y-auto">
-                 <div className="flex justify-end mb-4">
+            <div className="lg:w-2/3 w-full bg-white p-4 md:p-6 lg:fixed lg:top-0 lg:right-0 lg:h-screen overflow-y-auto">
+                <div className="flex justify-end mb-4">
                     <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         onClick={downloadResume}
@@ -666,7 +667,7 @@ const BuildResume = () => {
                         Download as PDF
                     </button>
                 </div>
-                <div id="resume-preview" className="w-[90%] bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-6 flex flex-col gap-4 a4-size">
+                <div id="resume-preview" className="w-full max-w-[210mm] mx-auto bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-4 md:p-6 flex flex-col gap-4 a4-size">
                     {/* Preview Components */}
                     <div ref={headlineRef}>
                        <Headline

@@ -11,7 +11,6 @@ interface Skill {
 interface SkillsProps {
   skills: Skill[];
 }
-
 const Skills: React.FC<SkillsProps> = ({ skills }) => {
   return (
     <div className="flex flex-col gap-2">

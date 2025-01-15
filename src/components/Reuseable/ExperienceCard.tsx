@@ -14,7 +14,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
   details,
 }) => {
   return (
-    <div className="w-full flex justify-between">
+    <div className="w-full flex flex-col md:flex-row md:justify-between gap-2">
       <div className="flex flex-col">
         <span className="font-semibold text-base">
           {position}, {company}

@@ -16,8 +16,8 @@
   .font-mono{
     font-family: 'Fira Code', monospace;
   }
-  
 }
+
 html{
   scroll-behavior: smooth;
 }
@@ -40,7 +40,18 @@ html{
 }
 
 .a4-size {
-  width: 210mm;
+  width: 100%;
+  max-width: 210mm;
   min-height: 297mm;
   padding: 20px;
+  margin: 0 auto;
+}
+
+@media print {
+  .a4-size {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 20mm;
+  }
 }
