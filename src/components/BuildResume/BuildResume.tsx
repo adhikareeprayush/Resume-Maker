@@ -6,6 +6,8 @@ import Projects from "../Reuseable/Projects";
 import Skills from "../Reuseable/Skills";
 import Summary from "../Reuseable/Summary";
 import Headline from "../Reuseable/Headline";
+import html2pdf from 'html2pdf.js'; // Import html2pdf
+
 
 // Define the type for education data
 type EducationData = {
@@ -274,6 +276,28 @@ const BuildResume = () => {
             }, 500);
         }
     }
+
+
+    const downloadResume = async () => {
+        const resumeElement = document.getElementById("resume-preview");
+        if (!resumeElement) {
+            console.error("Resume preview element not found.");
+            return;
+        }
+      
+      const opt = {
+        margin:       [5, 0, 0, 0],
+        filename:    'resume.pdf',
+        image:        { type: 'jpeg', quality: 8 },
+        html2canvas:  { scale: 5, dpi: 1000, letterRendering: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+    html2pdf()
+        .set(opt)
+        .from(resumeElement)
+        .save();
+    };
 
 
     return (
@@ -634,7 +658,15 @@ const BuildResume = () => {
 
             {/* Right Preview Section */}
            <div className="xl:w-2/3 w-full bg-white  p-6 fixed top-0 right-0 h-screen  overflow-y-auto">
-                <div className="w-[90%] bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-6 flex flex-col gap-4 ">
+                 <div className="flex justify-end mb-4">
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={downloadResume}
+                    >
+                        Download as PDF
+                    </button>
+                </div>
+                <div id="resume-preview" className="w-[90%] bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-6 flex flex-col gap-4 a4-size">
                     {/* Preview Components */}
                     <div ref={headlineRef}>
                        <Headline
