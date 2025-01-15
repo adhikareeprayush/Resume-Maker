@@ -7,18 +7,16 @@ interface SkillCardProps {
 
 const SkillCard: React.FC<SkillCardProps> = ({ skill, profiency }) => {
   return (
-    <div className="flex flex-col p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
-      <h3 className="font-semibold text-gray-800 mb-2">{skill}</h3>
-      <div className="flex flex-wrap gap-2">
+    <div className="flex flex-col max-w-[300px]">
+      <h3 className="font-medium">{skill}</h3>
+      <ul className="flex items-center flex-wrap text-md gap-1">
         {profiency.map((level, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium"
-          >
+          <li key={index}>
             {level}
-          </span>
+            {index == profiency.length - 1 ? "" : ","}
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
