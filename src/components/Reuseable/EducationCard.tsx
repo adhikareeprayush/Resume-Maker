@@ -14,17 +14,17 @@ const EducationCard: React.FC<EducationCardProps> = ({
   details,
 }) => {
   return (
-    <div className="w-full flex flex-col md:flex-row md:justify-between gap-2">
+    <div className="w-full flex flex-col md:flex-row md:justify-between gap-1 mb-2">
       <div className="flex flex-col">
-        <span className="font-semibold text-base">{degree}</span>
-        <span className="text-md font-normal">{institution}</span>
-        <ul className="list-disc text-sm font-normal pl-6 text-neutral-600">
+        <span className="text-gray-900 text-sm font-medium">{degree}</span>
+        <span className="text-sm text-gray-600">{institution}</span>
+        <ul className="list-disc text-sm pl-4 text-gray-600 mt-1">
           {details.map((detail, index) => (
             <li key={index}>{detail}</li>
           ))}
         </ul>
       </div>
-      <span className="text-base font-semibold">{duration}</span>
+      <span className="text-sm text-gray-600">{duration}</span>
     </div>
   );
 };

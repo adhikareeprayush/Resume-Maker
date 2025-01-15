@@ -758,7 +758,7 @@ const BuildResume = () => {
         </div>
         <div
   id="resume-preview"
-  className="w-full max-w-[210mm] mx-auto bg-white border border-gray-200 shadow-lg rounded-lg p-8 flex flex-col gap-6 a4-size"
+  className="w-full max-w-[210mm] mx-auto bg-white border border-gray-200 shadow-lg rounded-lg p-6 flex flex-col gap-4 a4-size"
 >
   <div ref={headlineRef}>
     <Headline
