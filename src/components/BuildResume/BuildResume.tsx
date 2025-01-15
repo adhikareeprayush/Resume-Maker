@@ -277,7 +277,7 @@ const BuildResume = () => {
     }
 
 
-    const downloadResume = () => {
+    const downloadResume = async () => {
         const resumeElement = document.getElementById("resume-preview");
         if (!resumeElement) {
             console.error("Resume preview element not found.");
@@ -290,14 +290,41 @@ const BuildResume = () => {
           format: 'a4',
         });
 
+        // Get the dimensions of the A4 page in points (72 points per inch)
+        const a4Width = 210; // mm
+        const a4Height = 297; // mm
+
+
+        // Get the computed styles for the resume element
+        const computedStyle = window.getComputedStyle(resumeElement);
+
+
+        // Calculate the scale factor to fit content within A4 dimensions
+        const contentWidth = resumeElement.offsetWidth;
+        const contentHeight = resumeElement.offsetHeight;
+
+        const pageWidthInMM = 210;
+        const pageHeightInMM = 297;
+
+        const marginX = 10; // mm
+        const marginY = 10; // mm
+
+          // Calculate the scale factor
+        const scaleX = (pageWidthInMM - (marginX * 2)) / contentWidth;
+        const scaleY = (pageHeightInMM - (marginY * 2)) / contentHeight;
+        const scale = Math.min(scaleX, scaleY);
+
 
         pdf.html(resumeElement, {
             callback: (doc) => {
                 doc.save("resume.pdf");
             },
-            margin: [10,10,10,10],
-            x: 10,
-            y: 10,
+            margin: [marginY,marginX,marginY,marginX],
+            x: marginX,
+            y: marginY,
+            width: contentWidth * scale,
+            windowWidth: contentWidth,
+            scale: scale
         })
     };
 
