@@ -6,7 +6,7 @@ import Projects from "../Reuseable/Projects";
 import Skills from "../Reuseable/Skills";
 import Summary from "../Reuseable/Summary";
 import Headline from "../Reuseable/Headline";
-import jsPDF from "jspdf";
+import html2pdf from 'html2pdf.js';
 
 // Define the type for education data
 type EducationData = {
@@ -283,51 +283,20 @@ const BuildResume = () => {
             console.error("Resume preview element not found.");
             return;
         }
-
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'mm',
-          format: 'a4',
-        });
-
-        // Get the dimensions of the A4 page in points (72 points per inch)
-        const a4Width = 210; // mm
-        const a4Height = 297; // mm
-
-
-        // Get the computed styles for the resume element
-        const computedStyle = window.getComputedStyle(resumeElement);
-
-
-        // Calculate the scale factor to fit content within A4 dimensions
-        const contentWidth = resumeElement.offsetWidth;
-        const contentHeight = resumeElement.offsetHeight;
-
-        const pageWidthInMM = 210;
-        const pageHeightInMM = 297;
-
-        const marginX = 10; // mm
-        const marginY = 10; // mm
-
-          // Calculate the scale factor
-        const scaleX = (pageWidthInMM - (marginX * 2)) / contentWidth;
-        const scaleY = (pageHeightInMM - (marginY * 2)) / contentHeight;
-        const scale = Math.min(scaleX, scaleY);
-
-
-        pdf.html(resumeElement, {
-            callback: (doc) => {
-                doc.save("resume.pdf");
-            },
-            margin: [marginY,marginX,marginY,marginX],
-            x: marginX,
-            y: marginY,
-            width: contentWidth * scale,
-            windowWidth: contentWidth,
-            scale: scale
-        })
+      
+      const opt = {
+        margin:       [5, 0, 0, 0],
+        filename:    'resume.pdf',
+        image:        { type: 'jpeg', quality: 1.4 },
+        html2canvas:  { scale: 4 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+    html2pdf()
+        .set(opt)
+        .from(resumeElement)
+        .save();
     };
-
 
     return (
         <div className="flex min-h-screen w-full  overflow-hidden">
