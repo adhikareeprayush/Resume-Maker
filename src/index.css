@@ -46,10 +46,9 @@ body {
 }
 
 .a4-size {
-  width: 100%;
-  max-width: 210mm;
+  width: 210mm;
   min-height: 297mm;
-  padding: 20px;
+  padding: 15mm;
   margin: 0 auto;
   background: white;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -61,9 +60,30 @@ body {
     width: 210mm;
     height: 297mm;
     margin: 0;
-    padding: 20mm;
+    padding: 15mm;
     box-shadow: none;
     border-radius: 0;
+    page-break-after: always;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Ensure proper spacing in print */
+  #resume-preview > div {
+    margin-bottom: 1.5rem;
+  }
+
+  #resume-preview p {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
   }
 }
 

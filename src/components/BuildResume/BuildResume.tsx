@@ -266,12 +266,12 @@ const BuildResume = () => {
       ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
       // Add temporary highlight effect
       ref.current.classList.add(
-        "bg-blue-100",
+        "bg-gray-100",
         "transition-colors",
         "duration-500"
       );
       setTimeout(() => {
-        ref.current?.classList.remove("bg-blue-100");
+        ref.current?.classList.remove("bg-gray-100");
       }, 500);
     }
   };
@@ -284,11 +284,24 @@ const BuildResume = () => {
     }
 
     const opt = {
-      margin: [5, 0, 0, 0],
+      margin: [0, 0, 0, 0],
       filename: "resume.pdf",
-      image: { type: "jpeg", quality: 8 },
-      html2canvas: { scale: 5, dpi: 1000, letterRendering: true },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      image: { type: "png", quality: 2 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        letterRendering: true,
+        windowWidth: 1200,
+      },
+      jsPDF: {
+        unit: "mm",
+        format: "a4",
+        orientation: "portrait",
+        compress: true,
+        precision: 16,
+      },
+      pagebreak: { mode: "avoid-all" },
     };
 
     html2pdf().set(opt).from(resumeElement).save();
@@ -299,14 +312,14 @@ const BuildResume = () => {
       {/* Left Form Section */}
       <div className="lg:w-1/3 w-full bg-white min-h-screen p-4 md:p-8 text-gray-800 overflow-y-auto border-r border-gray-200 shadow-lg">
         <form className="flex flex-col gap-6 max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold font-sans mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-bold font-sans mb-4 bg-gradient-to-r from-gray-800 to-purple-800 bg-clip-text text-transparent">
             Build Your Resume
           </h2>
 
           {/* Headline Section */}
           <div className="mb-4 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold font-sans mb-3 text-gray-700 flex items-center gap-2">
-              <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+              <span className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-800">
                 1
               </span>
               Personal Info
@@ -370,7 +383,7 @@ const BuildResume = () => {
           {/* Summary Section */}
           <div className="mb-4 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold font-sans mb-3 text-gray-700 flex items-center gap-2">
-              <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+              <span className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-800">
                 2
               </span>
               Professional Summary
@@ -386,7 +399,7 @@ const BuildResume = () => {
           {/* Education Section */}
           <div className="mb-4 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold font-sans mb-3 text-gray-700 flex items-center gap-2">
-              <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+              <span className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-800">
                 3
               </span>
               Education
@@ -455,7 +468,7 @@ const BuildResume = () => {
             ))}
             <button
               type="button"
-              className="text-blue-600 hover:text-blue-800 text-sm mt-2 self-start transition-all duration-200 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-lg flex items-center gap-2"
+              className="text-gray-700 hover:text-gray-900 text-sm mt-2 self-start transition-all duration-200 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg flex items-center gap-2"
               onClick={addEducationField}
             >
               <span>Add Education</span>
@@ -465,7 +478,7 @@ const BuildResume = () => {
           {/* Professional Experience Section */}
           <div className="mb-4 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold font-sans mb-3 text-gray-700 flex items-center gap-2">
-              <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+              <span className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-800">
                 4
               </span>
               Professional Experience
@@ -550,7 +563,7 @@ const BuildResume = () => {
             ))}
             <button
               type="button"
-              className="text-blue-600 hover:text-blue-800 text-sm mt-2 self-start transition-all duration-200 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-lg flex items-center gap-2"
+              className="text-gray-800 hover:text-gray-800 text-sm mt-2 self-start transition-all duration-200 bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center gap-2"
               onClick={addProfessionalExperienceField}
             >
               <span>Add Experience</span>
@@ -560,7 +573,7 @@ const BuildResume = () => {
           {/* Skills Section */}
           <div className="mb-4 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold font-sans mb-3 text-gray-700 flex items-center gap-2">
-              <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+              <span className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-800">
                 5
               </span>
               Skills
@@ -601,7 +614,7 @@ const BuildResume = () => {
           {/* Projects Section */}
           <div className="mb-4 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold font-sans mb-3 text-gray-700 flex items-center gap-2">
-              <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+              <span className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-800">
                 6
               </span>
               Projects
@@ -670,7 +683,7 @@ const BuildResume = () => {
             ))}
             <button
               type="button"
-              className="text-blue-600 hover:text-blue-800 text-sm mt-2 self-start transition-all duration-200 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-lg flex items-center gap-2"
+              className="text-gray-800 hover:text-gray-800 text-sm mt-2 self-start transition-all duration-200 bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center gap-2"
               onClick={addProjectField}
             >
               <span>Add Project</span>
@@ -680,7 +693,7 @@ const BuildResume = () => {
           {/* Profile Links Section */}
           <div className="mb-4 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold font-sans mb-3 text-gray-700 flex items-center gap-2">
-              <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+              <span className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-800">
                 7
               </span>
               Profile Links
@@ -737,44 +750,44 @@ const BuildResume = () => {
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Preview</h2>
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-2"
+            className="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-2"
             onClick={downloadResume}
           >
             Download PDF
           </button>
         </div>
         <div
-          id="resume-preview"
-          className="w-full max-w-[210mm] mx-auto bg-white border border-gray-200 shadow-lg rounded-lg p-8 flex flex-col gap-6 a4-size"
-        >
-          <div ref={headlineRef}>
-            <Headline
-              name={headlineData.name}
-              role={headlineData.role}
-              location={headlineData.location}
-              email={headlineData.email}
-              phone={headlineData.phone}
-            />
-          </div>
-          <div ref={summaryRef}>
-            <Summary title="Introduction" content={summaryContent} />
-          </div>
-          <div ref={educationRef}>
-            <Education educationData={educationData} />
-          </div>
-          <div ref={skillsRef}>
-            <Skills skills={skillsDate} />
-          </div>
-          <div ref={experienceRef}>
-            <ProfessionalExperience experiences={experienceData} />
-          </div>
-          <div ref={projectsRef}>
-            <Projects projects={projectsData} />
-          </div>
-          <div ref={profileLinksRef}>
-            <ProfileLinks profileLinks={profileLinksData} />
-          </div>
-        </div>
+  id="resume-preview"
+  className="w-full max-w-[210mm] mx-auto bg-white border border-gray-200 shadow-lg rounded-lg p-8 flex flex-col gap-6 a4-size"
+>
+  <div ref={headlineRef}>
+    <Headline
+      name={headlineData.name}
+      role={headlineData.role}
+      location={headlineData.location}
+      email={headlineData.email}
+      phone={headlineData.phone}
+    />
+  </div>
+  <div ref={summaryRef}>
+    <Summary title="Introduction" content={summaryContent} />
+  </div>
+  <div ref={educationRef}>
+    <Education educationData={educationData} />
+  </div>
+  <div ref={skillsRef}>
+    <Skills skills={skillsDate} />
+  </div>
+  <div ref={experienceRef}>
+    <ProfessionalExperience experiences={experienceData} />
+  </div>
+  <div ref={projectsRef}>
+    <Projects projects={projectsData} />
+  </div>
+  <div ref={profileLinksRef}>
+    <ProfileLinks profileLinks={profileLinksData} />
+  </div>
+</div>
       </div>
     </div>
   );
