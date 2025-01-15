@@ -39,3 +39,8 @@ html{
   background: #555;
 }
 
+.a4-size {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20px;
+}

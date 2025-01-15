@@ -6,6 +6,7 @@ import Projects from "../Reuseable/Projects";
 import Skills from "../Reuseable/Skills";
 import Summary from "../Reuseable/Summary";
 import Headline from "../Reuseable/Headline";
+import jsPDF from "jspdf";
 
 // Define the type for education data
 type EducationData = {
@@ -274,6 +275,31 @@ const BuildResume = () => {
             }, 500);
         }
     }
+
+
+    const downloadResume = () => {
+        const resumeElement = document.getElementById("resume-preview");
+        if (!resumeElement) {
+            console.error("Resume preview element not found.");
+            return;
+        }
+
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a4',
+        });
+
+
+        pdf.html(resumeElement, {
+            callback: (doc) => {
+                doc.save("resume.pdf");
+            },
+            margin: [10,10,10,10],
+            x: 10,
+            y: 10,
+        })
+    };
 
 
     return (
@@ -634,7 +660,15 @@ const BuildResume = () => {
 
             {/* Right Preview Section */}
            <div className="xl:w-2/3 w-full bg-white  p-6 fixed top-0 right-0 h-screen  overflow-y-auto">
-                <div className="w-[90%] bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-6 flex flex-col gap-4 ">
+                 <div className="flex justify-end mb-4">
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={downloadResume}
+                    >
+                        Download as PDF
+                    </button>
+                </div>
+                <div id="resume-preview" className="w-[90%] bg-white border-[0.3px] border-slate-200 shadow-md rounded-md p-6 flex flex-col gap-4 a4-size">
                     {/* Preview Components */}
                     <div ref={headlineRef}>
                        <Headline
