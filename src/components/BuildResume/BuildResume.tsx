@@ -6,7 +6,8 @@ import Projects from "../Reuseable/Projects";
 import Skills from "../Reuseable/Skills";
 import Summary from "../Reuseable/Summary";
 import Headline from "../Reuseable/Headline";
-import html2pdf from 'html2pdf.js';
+import html2pdf from 'html2pdf.js'; // Import html2pdf
+
 
 // Define the type for education data
 type EducationData = {
@@ -287,8 +288,8 @@ const BuildResume = () => {
       const opt = {
         margin:       [5, 0, 0, 0],
         filename:    'resume.pdf',
-        image:        { type: 'jpeg', quality: 1.4 },
-        html2canvas:  { scale: 4 },
+        image:        { type: 'jpeg', quality: 8 },
+        html2canvas:  { scale: 5, dpi: 1000, letterRendering: true },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       
@@ -297,6 +298,7 @@ const BuildResume = () => {
         .from(resumeElement)
         .save();
     };
+
 
     return (
         <div className="flex min-h-screen w-full  overflow-hidden">
