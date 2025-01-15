@@ -22,21 +22,27 @@ html{
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: #f8fafc;
+}
+
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #94a3b8;
 }
 
 .a4-size {
@@ -45,6 +51,9 @@ html{
   min-height: 297mm;
   padding: 20px;
   margin: 0 auto;
+  background: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
 }
 
 @media print {
@@ -53,5 +62,12 @@ html{
     height: 297mm;
     margin: 0;
     padding: 20mm;
+    box-shadow: none;
+    border-radius: 0;
   }
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease-in-out;
 }
