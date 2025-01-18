@@ -2,15 +2,15 @@ import React from "react";
 import SectionHeader from "./SectionHeader";
 
 interface SummaryProps {
-  title: string; // The title of the summary section
-  content: string; // The content or description text
+  title: string;
+  content: string;
 }
 
 const Summary: React.FC<SummaryProps> = ({ title, content }) => {
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col space-y-2">
       <SectionHeader title={title} />
-      <p className="text-neutral-600">{content}</p>
+      <p className="text-neutral-600 leading-relaxed">{content}</p>
     </div>
   );
 };

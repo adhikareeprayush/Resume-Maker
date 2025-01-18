@@ -5,42 +5,250 @@
 @tailwind utilities;
 
 @layer base {
-  .font-sans{
+  .font-sans {
     font-family: 'Inter', sans-serif;
   }
 
-  .font-serif{
+  .font-serif {
     font-family: 'Merriweather', serif;
   }
 
-  .font-mono{
+  .font-mono {
     font-family: 'Fira Code', monospace;
   }
-  
 }
-html{
+
+html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: #f8fafc;
+}
+
+/* Enhanced highlight animation */
+@keyframes highlightFade {
+  0% {
+    background-color: rgba(59, 130, 246, 0.1);
+    transform: translateY(0);
+  }
+  50% {
+    background-color: rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+  }
+  100% {
+    background-color: transparent;
+    transform: translateY(0);
+  }
+}
+
+@keyframes highlightPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.highlight-section {
+  animation: highlightFade 2s ease-out;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.highlight-pulse {
+  animation: highlightPulse 2s infinite;
+}
+
+/* Smooth section transitions */
+.section-content {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f5f9;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #94a3b8;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #64748b;
 }
 
+/* Form field animations */
+input, textarea {
+  @apply transform transition-all duration-200;
+}
+
+input:focus, textarea:focus {
+  @apply ring-2 ring-blue-100 border-blue-400 outline-none -translate-y-0.5;
+}
+
+/* History controls */
+.history-controls {
+  @apply fixed bottom-4 right-4 z-50 flex gap-2;
+}
+
+
+.history-button {
+  @apply p-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:bg-gray-100;
+}
+
+/* Section management */
+.section-header {
+  @apply flex items-center justify-between p-2 cursor-pointer hover:bg-gray-50 rounded-t-lg;
+}
+
+.section-header.collapsed {
+  @apply rounded-lg;
+}
+
+/* Preview section */
+.preview-section {
+  @apply lg:fixed lg:right-0 lg:top-0 lg:w-2/3 lg:h-screen lg:overflow-y-auto;
+}
+
+/* Form section */
+.form-section {
+  @apply w-full lg:w-1/3 overflow-y-auto;
+}
+
+/* A4 size for resume */
 .a4-size {
   width: 210mm;
   min-height: 297mm;
-  padding: 20px;
+  padding: 15mm;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Draggable item styles */
+.draggable-item {
+  @apply cursor-move relative;
+}
+
+.draggable-item.dragging {
+  @apply opacity-50 bg-gray-50;
+}
+
+.drag-handle {
+  @apply absolute left-2 top-1/2 -translate-y-1/2 cursor-move opacity-50 hover:opacity-100;
+}
+
+/* Rich text editor styles */
+.rich-editor {
+  @apply prose prose-sm max-w-none;
+}
+
+.rich-editor h1 {
+  @apply text-2xl font-bold mb-4;
+}
+
+.rich-editor h2 {
+  @apply text-xl font-semibold mb-3;
+}
+
+.rich-editor p {
+  @apply mb-2;
+}
+
+.rich-editor ul {
+  @apply list-disc pl-5 mb-2;
+}
+
+.rich-editor ol {
+  @apply list-decimal pl-5 mb-2;
+}
+
+/* Print styles */
+@media print {
+  .a4-size {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 15mm;
+    box-shadow: none;
+    border-radius: 0;
+    page-break-after: always;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #resume-preview > div {
+    margin-bottom: 1.5rem;
+  }
+
+  #resume-preview p {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .edit-actions,
+  .drag-handle,
+  .history-controls {
+    display: none;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 1023px) {
+  .highlight-section {
+    animation: none;
+  }
+
+  .preview-section {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .form-section {
+    width: 100%;
+  }
+
+  .a4-size {
+    width: 100%;
+    min-height: auto;
+    padding: 2rem;
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+button, a {
+  @apply transition-all duration-200;
+}
+
+/* Tooltip styles */
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
 }

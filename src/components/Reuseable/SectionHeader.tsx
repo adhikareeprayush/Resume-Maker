@@ -1,13 +1,13 @@
 interface SectionHeaderProps {
-  title: string; // The title of the section
+  title: string;
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ title }) => {
   return (
-    <>
-      <h5 className="text-xl font-medium font-sans">{title}</h5>
-      <hr className="h-[1px] w-full bg-slate-700 mb-1" />
-    </>
+    <div className="mb-2">
+      <h5 className="text-base font-medium text-gray-900">{title}</h5>
+      <div className="h-[1px] w-full bg-gray-200 mt-1"></div>
+    </div>
   );
 };
 
