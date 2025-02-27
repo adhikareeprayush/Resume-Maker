@@ -1,6 +1,6 @@
-import React from "react";
-import SectionHeader from "./SectionHeader";
-import SkillCard from "./SkillCard";
+import React from 'react';
+import SectionHeader from './SectionHeader';
+import SkillCard from './SkillCard';
 
 // Define the types for the props
 interface Skill {

@@ -1,5 +1,5 @@
-import React from "react";
-import SectionHeader from "./SectionHeader";
+import React from 'react';
+import SectionHeader from './SectionHeader';
 
 interface SummaryProps {
   title: string;
