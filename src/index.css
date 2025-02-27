@@ -191,6 +191,114 @@ textarea:focus {
   pointer-events: none;
 }
 
+/* Resume container for better scrolling */
+.resume-container {
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 2rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile responsive styles for resume */
+@media (max-width: 767px) {
+  .a4-size {
+    padding: 10mm 5mm !important; /* Reduced padding */
+    min-width: 210mm;
+    transform-origin: top left;
+    overflow-x: visible !important;
+    margin-right: 20px !important; /* Add margin to prevent cutoff on the right */
+  }
+  
+  /* Adjust font sizes for mobile */
+  #resume-preview h1 {
+    font-size: 1.5rem;
+  }
+  
+  #resume-preview h2 {
+    font-size: 1.2rem;
+  }
+  
+  #resume-preview h3 {
+    font-size: 1rem;
+  }
+  
+  #resume-preview p, 
+  #resume-preview span,
+  #resume-preview li {
+    font-size: 0.75rem;
+  }
+  
+  .a4-size {
+    padding: 10mm;
+    min-width: 210mm; /* Keep the full width */
+    transform-origin: top left;
+    overflow-x: visible !important; /* Ensure content doesn't get clipped */
+  }
+  
+  /* Adjust font sizes but preserve layout */
+  #resume-preview h1 {
+    font-size: 1.5rem;
+  }
+  
+  #resume-preview h2 {
+    font-size: 1.2rem;
+  }
+  
+  #resume-preview h3 {
+    font-size: 1rem;
+  }
+  
+  #resume-preview p, 
+  #resume-preview span,
+  #resume-preview li {
+    font-size: 0.75rem;
+  }
+  
+  /* Prevent text wrapping in date fields to avoid clipping */
+  .duration-text {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    position: relative !important;
+    right: auto !important;
+    padding-left: 2px !important;
+    padding-right: 5px !important; /* Add padding to prevent cutoff */
+    margin-right: 5px !important; /* Add margin to prevent cutoff */
+  }
+  
+  /* Ensure flex containers don't clip their children */
+  #resume-preview .flex.justify-between {
+    flex-wrap: wrap !important;
+    margin-right: 8px !important; /* Added margin to prevent cutoff */
+  }
+  
+  /* For experience/education durations - expanded selector to catch all cases */
+  #resume-preview .flex.justify-between span,
+  .experience-item span,
+  .education-item span,
+  .project-item span {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    z-index: 10 !important; /* Ensure dates appear above other content */
+    max-width: 100px !important; /* Limit width to prevent overflow */
+    text-overflow: ellipsis !important; /* Add ellipsis if text is too long */
+  }
+  
+  /* Give more right margin to the left content to make room for dates */
+  .experience-item .flex div:first-child,
+  .education-item .flex div:first-child,
+  .project-item .flex div:first-child {
+    max-width: 60% !important; /* Reduced width to prevent cutoff */
+  }
+  
+  /* Make dates more compact in mobile view */
+  .education-item .flex span,
+  .experience-item .flex span,
+  .project-item .flex span {
+    font-size: 0.7rem !important; /* Slightly smaller font for dates */
+    padding: 1px 4px !important; /* More compact padding */
+  }
+}
+
 /* Draggable item styles */
 .draggable-item {
   @apply cursor-move relative;
@@ -235,7 +343,7 @@ textarea:focus {
     width: 210mm;
     height: 297mm;
     margin: 0;
-    padding: 15mm;
+    padding: 10mm !important; /* Reduced padding for print */
     box-shadow: none;
     border-radius: 0;
     page-break-after: always;
@@ -265,6 +373,14 @@ textarea:focus {
   .history-controls {
     display: none;
   }
+
+  /* Ensure dates don't get cut off in print */
+  .duration-text, 
+  #resume-preview .flex.justify-between span {
+    margin-right: 5mm !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
 }
 
 /* Responsive styles */
@@ -277,6 +393,7 @@ textarea:focus {
     position: relative;
     width: 100%;
     height: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling of the container */
   }
 
   .form-section {
@@ -287,6 +404,15 @@ textarea:focus {
     width: 100%;
     min-height: auto;
     padding: 2rem;
+  }
+  
+  /* Don't modify the width to ensure template layout stays intact */
+  .a4-size {
+    /* Keep minimum width but improve scrolling */
+    min-width: 210mm;
+    padding: 2rem 1rem !important; /* Reduced padding */
+    min-height: auto;
+    overflow-x: visible !important;
   }
 }
 

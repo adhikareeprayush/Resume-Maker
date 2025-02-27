@@ -10,9 +10,9 @@ interface ProfessionalTemplateProps {
 
 const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ state, refs }) => {
   return (
-    <div className="flex flex-col md:flex-row gap-6 font-sans">
+    <div className="flex flex-row gap-6 font-sans">
       {/* Left Column - Main Content */}
-      <div className="w-full md:w-[62%]">
+      <div className="w-[62%]">
         <div ref={refs.headline} className="mb-5">
           <h1 className="text-3xl font-bold text-gray-900 leading-tight">{state.headlineData.name}</h1>
           <h2 className="text-xl text-gray-700 mt-1 font-medium">{state.headlineData.role}</h2>
@@ -36,7 +36,7 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ state, refs
                   <h4 className="text-sm font-semibold text-gray-900 group-hover:text-black transition-colors">{exp.position}</h4>
                   <p className="text-sm text-gray-700 font-medium">{exp.company}</p>
                 </div>
-                <span className="text-xs text-gray-600 font-medium bg-gray-100 px-2 py-0.5 rounded-full">{exp.duration}</span>
+                <span className="text-xs text-gray-600 font-medium bg-gray-100 px-2 py-0.5 rounded-full duration-text">{exp.duration}</span>
               </div>
               <ul className="mt-2 space-y-1 text-xs text-gray-700">
                 {exp.details.map((detail, i) => (
@@ -61,7 +61,7 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ state, refs
                   <h4 className="text-sm font-semibold text-gray-900">{project.name}</h4>
                   <p className="text-sm text-gray-700">{project.company}</p>
                 </div>
-                <span className="text-xs text-gray-600 font-medium bg-gray-100 px-2 py-0.5 rounded-full">{project.duration}</span>
+                <span className="text-xs text-gray-600 font-medium bg-gray-100 px-2 py-0.5 rounded-full duration-text">{project.duration}</span>
               </div>
               <ul className="mt-2 space-y-1 text-xs text-gray-700">
                 {project.details.map((detail, i) => (
@@ -77,7 +77,7 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ state, refs
       </div>
 
       {/* Right Column - Sidebar */}
-      <div className="w-full md:w-[38%] bg-gray-50 p-4 rounded-lg">
+      <div className="w-[38%] bg-gray-50 p-4 rounded-lg">
         <div className="mb-5 bg-white p-3 rounded-lg shadow-sm">
           <h3 className="text-sm font-semibold text-gray-900 mb-2 section-title">Contact</h3>
           <div className="space-y-2 mt-3">
@@ -137,7 +137,7 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ state, refs
               <div key={index} className="mb-3">
                 <h4 className="text-xs font-semibold text-gray-900">{edu.degree}</h4>
                 <p className="text-xs text-gray-700">{edu.institution}</p>
-                <p className="text-xs text-gray-600 font-medium bg-gray-100 inline-block px-2 py-0.5 rounded-full mt-1">{edu.duration}</p>
+                <p className="text-xs text-gray-600 font-medium bg-gray-100 inline-block px-2 py-0.5 rounded-full mt-1 duration-text">{edu.duration}</p>
                 <ul className="mt-1.5 space-y-0.5 text-xs text-gray-700">
                   {edu.details.map((detail, i) => (
                     <li key={i} className="flex items-start gap-1.5">
@@ -160,10 +160,10 @@ const ProfessionalTemplate: React.FC<ProfessionalTemplateProps> = ({ state, refs
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
+                className="flex items-center gap-2 text-gray-800 hover:text-black transition-colors"
               >
-                <div className="w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center">
-                  <svg className="w-3 h-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center">
+                  <svg className="w-3 h-3 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 015.656 0l4 4a4 4 0 01-5.656 5.656l-1.102-1.101" />
                   </svg>
