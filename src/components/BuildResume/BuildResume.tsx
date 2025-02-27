@@ -7,17 +7,24 @@ import HistoryControls from './components/HistoryControls';
 import { useHistory } from './hooks/useHistory';
 import { useScrollHighlight } from './hooks/useScrollHighlight';
 import { initialState } from './data/initialState';
+import { initialState as initialState1 } from './data/initialState1';
 import type { HistoryState } from './types';
 
-const BuildResume: React.FC = () => {
+interface BuildResumeProps {
+  template: "modern" | "professional";
+}
+
+const BuildResume: React.FC<BuildResumeProps> = ({ template }) => {
+  const defaultState = template === "modern" ? initialState : initialState1;
+
   // State management
-  const [headlineData, setHeadlineData] = useState(initialState.headlineData);
-  const [summaryContent, setSummaryContent] = useState(initialState.summaryContent);
-  const [skillsData, setSkillsData] = useState(initialState.skillsData);
-  const [educationData, setEducationData] = useState(initialState.educationData);
-  const [experienceData, setExperienceData] = useState(initialState.experienceData);
-  const [projectsData, setProjectsData] = useState(initialState.projectsData);
-  const [profileLinksData, setProfileLinksData] = useState(initialState.profileLinksData);
+  const [headlineData, setHeadlineData] = useState(defaultState.headlineData);
+  const [summaryContent, setSummaryContent] = useState(defaultState.summaryContent);
+  const [skillsData, setSkillsData] = useState(defaultState.skillsData);
+  const [educationData, setEducationData] = useState(defaultState.educationData);
+  const [experienceData, setExperienceData] = useState(defaultState.experienceData);
+  const [projectsData, setProjectsData] = useState(defaultState.projectsData);
+  const [profileLinksData, setProfileLinksData] = useState(defaultState.profileLinksData);
   const [collapsedSections, setCollapsedSections] = useState<Set<string>>(new Set());
 
   // Refs for scrolling
@@ -116,6 +123,7 @@ const BuildResume: React.FC = () => {
         <PreviewSection
           state={getCurrentState()}
           refs={refs}
+          template={template}
         />
       </div>
     </DndProvider>

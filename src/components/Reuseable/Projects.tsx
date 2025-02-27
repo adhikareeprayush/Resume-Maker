@@ -1,6 +1,6 @@
-import React from "react";
-import ProjectCard from "./ProjectCard";
-import SectionHeader from "./SectionHeader";
+import React from 'react';
+import ProjectCard from './ProjectCard';
+import SectionHeader from './SectionHeader';
 
 // Define the types for the project data
 interface Project {
