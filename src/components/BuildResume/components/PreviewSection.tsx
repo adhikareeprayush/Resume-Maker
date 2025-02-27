@@ -2,13 +2,6 @@ import React from 'react';
 import type { HistoryState } from '../types';
 import ModernTemplate from '../templates/ModernTemplate';
 import ProfessionalTemplate from '../templates/ProfessionalTemplate';
-import Headline from '../../Reuseable/Headline';
-import Summary from '../../Reuseable/Summary';
-import Education from '../../Reuseable/Education';
-import ProfessionalExperience from '../../Reuseable/ProfessionalExperience';
-import Skills from '../../Reuseable/Skills';
-import Projects from '../../Reuseable/Projects';
-import ProfileLinks from '../../Reuseable/ProfileLinks';
 
 interface PreviewSectionProps {
   state: HistoryState;
