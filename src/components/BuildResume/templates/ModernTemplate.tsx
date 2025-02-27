@@ -16,6 +16,11 @@ interface ModernTemplateProps {
 }
 
 const ModernTemplate: React.FC<ModernTemplateProps> = ({ state, refs }) => {
+  // We need to pass a custom className to handle date elements
+  const customClasses = {
+    duration: "duration-text"
+  };
+
   return (
     <div className="font-sans">
       <div ref={refs.headline}>
@@ -27,11 +32,11 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ state, refs }) => {
       </div>
 
       <div ref={refs.education} className="mt-6">
-        <Education educationData={state.educationData} />
+        <Education educationData={state.educationData} customClasses={customClasses} />
       </div>
 
       <div ref={refs.experience} className="mt-6">
-        <ProfessionalExperience experiences={state.experienceData} />
+        <ProfessionalExperience experiences={state.experienceData} customClasses={customClasses} />
       </div>
 
       <div ref={refs.skills} className="mt-6">
@@ -39,7 +44,7 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ state, refs }) => {
       </div>
 
       <div ref={refs.projects} className="mt-6">
-        <Projects projects={state.projectsData} />
+        <Projects projects={state.projectsData} customClasses={customClasses} />
       </div>
 
       <div ref={refs.profileLinks} className="mt-6">
