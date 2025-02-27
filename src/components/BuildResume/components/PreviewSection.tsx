@@ -20,7 +20,7 @@ const PreviewSection: React.FC<PreviewSectionProps> = ({ state, refs, template }
     const isMobile = window.innerWidth < 768;
     
     // Save original styles to restore later
-    let originalStyles = {};
+    let originalStyles: Record<string, string> = {};
     if (isMobile) {
       // Capture original styles
       const resumePreviewElement = document.getElementById('resume-preview');
@@ -67,7 +67,7 @@ const PreviewSection: React.FC<PreviewSectionProps> = ({ state, refs, template }
         const resumePreviewElement = document.getElementById('resume-preview');
         if (resumePreviewElement) {
           Object.entries(originalStyles).forEach(([prop, value]) => {
-            resumePreviewElement.style[prop] = value as string;
+            resumePreviewElement.style[prop as any] = value;
           });
         }
       }
